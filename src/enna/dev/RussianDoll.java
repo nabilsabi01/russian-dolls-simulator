@@ -2,15 +2,35 @@ package enna.dev;
 
 public class RussianDoll extends Doll{
     // fields
+    private String name;
+    private String color;
     private Doll doll;
 
     // constructor parameter
-    public RussianDoll(int size) {
+    public RussianDoll(String name, String color, int size) {
         super(size);
-        doll = null;
+        this.name = name;
+        this.color = color;
+        this.doll = null;
     }
 
     // getter and setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public Doll getDoll() {
         return doll;
     }
@@ -26,7 +46,7 @@ public class RussianDoll extends Doll{
         if (isOpened()) {
             System.out.println("La poupée est déjà ouverte.");
         } else {
-            System.out.println("Ouverture de la poupée russe de taille " + getSize());
+            System.out.println("Ouverture de la poupée russe de nom " + getName() + " de taille " + getSize());
             setOpened(true);
         }
     }
@@ -39,7 +59,7 @@ public class RussianDoll extends Doll{
         } else if (doll != null) {
             System.out.println("Veuillez d'abord sortir la poupée contenue avant de fermer.");
         } else {
-            System.out.println("Fermeture de la poupée russe de taille " + getSize());
+            System.out.println("Fermeture de la poupée russe dde nom " + getName() + " de taille " + getSize());
             setOpened(false);
         }
     }
@@ -52,26 +72,23 @@ public class RussianDoll extends Doll{
         } else if (!p.isOpened()) {
             System.out.println("Veuillez d'abord ouvrir la poupée de destination.");
         } else {
-            System.out.println("Placement de la poupée russe de taille " + getSize() + " dans une poupée de taille " + p.getSize());
-            doll = (RussianDoll) p;
+            System.out.println("Placement de la poupée russe de taille " + getSize()+ " dans une poupée de taille " + p.getSize());
+            setDoll(p);
         }
     }
 
     // methode takes out the current doll from the p doll
     @Override
     public void outIn(Doll p) {
-        if (p != doll) {
+        if (p != getDoll()) {
             System.out.println("La poupée n'est pas contenue dans cette poupée.");
-        } else {
-            System.out.println("Sortie de la poupée russe de taille " + getSize() + " de la poupée de taille " + p.getSize());
-            doll = null;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "RussianDoll{" +
-                "doll=" + doll +
-                '}';
+        else if(!isOpened()) {
+            System.out.println("La poupée est ferme");
+        }
+        else {
+            System.out.println("Sortie de la poupée russe de taille " + getSize() + " de la poupée de taille " + p.getSize());
+            setDoll(null);
+        }
     }
 }
