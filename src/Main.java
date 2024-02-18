@@ -1,4 +1,3 @@
-import enna.dev.Doll;
 import enna.dev.RussianDoll;
 
 import java.util.Scanner;
@@ -50,8 +49,15 @@ public class Main {
                     int numDollDestination = sc.nextInt();
                     placeInDoll(numDollPlace, numDollDestination, p1, p2, p3);
                     break;
+                case 4:
+                    System.out.print("Numéro de la poupée à Sortir (1 : Poupe 1, 2 : Poupe 2, 3: Poupe 3) : ");
+                    int numDollOut = sc.nextInt();
+                    System.out.print("Le numéro de la poupée que vous souhaitez extraire (1 : Poupe 1, 2 : Poupe 2, 3: Poupe 3) : ");
+                    int numDestination = sc.nextInt();
+                    OutInDoll(numDollOut, numDestination, p1, p2, p3);
+                break;
             }
-        }while (choice != 4);
+        }while (choice != 5);
     }
 
     private static void placeInDoll(int numDoll, int sizeDestination, RussianDoll p1, RussianDoll p2, RussianDoll p3) {
@@ -72,6 +78,30 @@ public class Main {
         }
         else if (numDoll == 3 && sizeDestination == 2){
             p3.placeIn(p2);
+        }
+        else {
+            System.out.println("impossible");
+        }
+    }
+
+    private static void OutInDoll(int outDoll, int dollDestination, RussianDoll p1, RussianDoll p2, RussianDoll p3) {
+        if (outDoll == 1 && dollDestination == 2){
+            p1.outIn(p2);
+        }
+        else if (outDoll == 1 && dollDestination == 3){
+            p1.outIn(p3);
+        }
+        else if (outDoll == 2 && dollDestination == 1){
+            p2.outIn(p1);
+        }
+        else if (outDoll == 2 && dollDestination == 3){
+            p2.outIn(p3);
+        }
+        else if (outDoll == 3 && dollDestination == 1){
+            p3.outIn(p1);
+        }
+        else if (outDoll == 3 && dollDestination == 2){
+            p3.outIn(p2);
         }
         else {
             System.out.println("impossible");
